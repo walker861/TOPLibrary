@@ -1,25 +1,33 @@
-function Book(title, author, pages, read) {
-  (this.title = title),
-    (this.author = author),
-    (this.pages = pages),
-    (this.read = read);
+
+class Book { 
+  constructor(title, author, pages, read) {
+    this.title = title,
+    this.author = author,
+    this.pages = pages,
+    this.read = read
+  }
+
+  info() {
+    console.log(
+      `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}.`
+    );
+  }
+
+  read() {
+    read.checked === true ? (read = 'Read') : (read = 'Not Read Yet');
+  }
 }
-
-Book.prototype.info = function () {
-  console.log(
-    `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}.`
-  );
-};
-
-Book.prototype.read = function () {
-  read.checked === true ? (read = 'Read') : (read = 'Not Read Yet');
-};
 
 /////////////
 // Variables
 /////////////
 let myLibrary = [
-  { title: 'The Hobbit', author: 'J.R.R. Tolkien', pages: 310, read: 'Read' },
+  {
+    title: 'The Hobbit',
+    author: 'J.R.R. Tolkien',
+    pages: 310,
+    read: 'Read',
+  },
   {
     title: 'Catcher in the Rye',
     author: 'J.D. Saliger',
@@ -33,6 +41,7 @@ let myLibrary = [
     read: 'Read',
   },
 ];
+
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
 const pagesInput = document.getElementById('pages');
@@ -48,7 +57,7 @@ const addNewBookBtn = document.getElementById('addNewBook');
 //////////////
 // Functions
 //////////////
-function addBook() {
+function addNewBook() {
   let userBook = new Book(
     titleInput.value,
     authorInput.value,
@@ -93,16 +102,6 @@ function displayBookshelf() {
 
 displayBookshelf();
 
-// function removeBook(book) {
-//   const indexOfBookToRemove = myLibrary.findIndex(
-//     ({ title }) => title === book
-//   );
-
-//   myLibrary.splice(indexOfBookToRemove, 1);
-
-//   displayBookshelf();
-// }
-
 function toggleReadStatus(book) {
   book.style.backgroundColor = '';
   if (book.innerText === 'Read') {
@@ -124,7 +123,7 @@ addBookBtn.addEventListener('click', (e) => {
     error.innerHTML = '<p>Please enter book information</p>';
   } else {
     error.innerHTML = '';
-    addBook(this);
+    addNewBook(this);
     overlay.setAttribute('hidden', '');
     console.log(e.target);
     toggleReadStatus(e.target);
